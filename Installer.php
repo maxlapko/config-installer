@@ -12,7 +12,7 @@ class Installer
 
     public static function run($event)
     {
-        $root = str_replace('\\', '/', __DIR__ . '/../../');
+        $root = '.' . DIRECTORY_SEPARATOR;
         $envNames = ['dev', 'prod'];
 
         echo "Yii Application Initialization Tool v1.0\n\n";
@@ -41,7 +41,8 @@ class Installer
         echo "\n  Start initialization ...\n\n";
         $all = false;
 
-        self::copyFile($root, "app/config/env/{$envName}.php", "app/config/env.php", $all, []);
+        $ds = DIRECTORY_SEPARATOR;
+        self::copyFile($root, "app{$ds}config{$ds}env{$ds}{$envName}.php", "app{$ds}config{$ds}env.php", $all, []);
 
         echo "\n  ... initialization completed.\n\n";
     }
@@ -54,12 +55,13 @@ class Installer
 
     protected static function copyFile($root, $source, $target, &$all, $params)
     {
-        if (!is_file($root . '/' . $source)) {
+        $root = rtrim($root, DIRECTORY_SEPARATOR);
+        if (!is_file($root . DIRECTORY_SEPARATOR . $source)) {
             echo "       skip $target ($source not exist)\n";
             return true;
         }
-        if (is_file($root . '/' . $target)) {
-            if (file_get_contents($root . '/' . $source) === file_get_contents($root . '/' . $target)) {
+        if (is_file($root . DIRECTORY_SEPARATOR . $target)) {
+            if (file_get_contents($root . DIRECTORY_SEPARATOR . $source) === file_get_contents($root . DIRECTORY_SEPARATOR . $target)) {
                 echo "  unchanged $target\n";
                 return true;
             }
@@ -87,11 +89,11 @@ class Installer
                     }
                 }
             }
-            file_put_contents($root . '/' . $target, file_get_contents($root . '/' . $source));
+            file_put_contents($root . DIRECTORY_SEPARATOR . $target, file_get_contents($root . DIRECTORY_SEPARATOR . $source));
             return true;
         }
         echo "   generate $target\n";
-        return copy($root . '/' . $source, $root . '/' . $target);
+        return copy($root . DIRECTORY_SEPARATOR . $source, $root . DIRECTORY_SEPARATOR . $target);
     }
 
 }
