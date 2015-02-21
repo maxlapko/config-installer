@@ -1,0 +1,31 @@
+{
+	"name": "maxlapko/config-installer",
+	"description": "config installer",
+	"version": "0.0.1",
+	"type": "extension",
+	"keywords": ["yii", "yii2", "config", "component"],
+	"homepage": "https://github.com/maxlapko/config-installer",
+	"time": "2014-04-29",
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Max Lapko",
+			"email": "maxlapko@gmail.com",
+			"homepage": "https://github.com/maxlapko",
+			"role": "Team Lead Developer"
+		}
+	],
+	"support": {
+		"issues": "https://github.com/maxlapko/config-installer/issues",
+		"source": "https://github.com/maxlapko/config-installer"
+	},
+	"require": {
+		"php": ">=5.4.0"
+	},
+	"autoload": {
+		"psr-4": {
+			"maxlapko\\components\\": ""
+		}
+	},
+	"minimum-stability": "dev"
+}
